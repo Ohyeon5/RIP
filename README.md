@@ -1,9 +1,37 @@
 # RIP
-Reveal impacts of eco-friendly Policies 
+Reveal Impacts of eco-friendly Policies
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+### Who we are?
+
+We're a team of three around the world whom are from three different timezones to tackle with the climate change issues, teamed up for OpenAI Hackathon
+for Climate Change.
+
+
+### What we're focusing on?
+
+We hear from so many individuals and companies about eco-friendly solutions or products being promoted, but in the second layer those solutions might be causing more CO2 emissions. We thought we can try to find some insights around those via OpenAI API capabilities.
+
+
+### What stages are we planning to have to get results? And how are they aligned with OpenAI features?
+
+* Finding resources we can use as an input for our solution. (GPT3 Compare for semantic search and recommendations)
+* Grouping, filtering and transforming the inputs which migh be useful for our search on second layer affects of policies and applications. (GPT3 Edit)
+* Generating quotes and new short definitions from what we found, as a list of takeaways. (GPT3 Explain and Write)
+* Supporting our findings with auto generated images from the copies we generated. (DALL-E)
+
+
+### Some resources we looked into to define the scope and context better for our model.
+
+* https://www.ipcc.ch/reports
+* https://www.iea.org/topics/world-energy-outlook
+* https://www.worldbank.org/en/programs/the-world-bank-group-at-cop/publications
+* https://www.consilium.europa.eu/en/policies/climate-change
+* https://www.un.org/en/climatechange/science/causes-effects-climate-change
+* https://climate-laws.org
+
+
 
 ## Getting Started
 
@@ -43,12 +71,14 @@ command to run if program contains helper info
 
 Contributors names and contact info
 
-* Metin Aydar []()
+* Metin Aydar [@metinaydar](https://github.com/metinaydar)
 * Leif Martinson []()
 * Oh-hyeon Choung [@Ohyeon5](https://github.com/Ohyeon5)
 
 ## Version History
 
+* 0.3
+    * Updates on the README for more descriptive context
 * 0.2
     * Various bug fixes and optimizations
     * See [commit change]() or See [release history]()
