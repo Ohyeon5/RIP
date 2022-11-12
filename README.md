@@ -35,6 +35,11 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 ## Getting Started
 
+from root path, run: 
+```
+streamlit run ./streamlit/app.py
+```
+
 ### Dependencies
 
 * Describe any prerequisites, libraries, OS version, etc., needed before installing program.
