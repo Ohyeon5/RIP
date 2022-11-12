@@ -1,27 +1,24 @@
 import openai
 import streamlit as st
 
-from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
+from rip.utils import initialize_openai_api, DEFAULT_IMG_URL, validate_url
+from ui.components.input_data import input_initial_data
 
 
 def init():
     # page settings
     st.set_page_config(
-        layout="wide",
+        layout="centered",
         page_title="Reveal Impacts of eco-friendly Policies (RIP)",
         page_icon="globe",
-        menu_items={
-            "Get help": "https://github.com/Ohyeon5/RIP"
-        }
+        menu_items={"Get help": "https://github.com/Ohyeon5/RIP"},
     )
     # initialize openai api's variables
     initialize_openai_api()
 
-def tldr():
-    text_input = st.text_input(
-        "Which impact are you curious about?",
-        placeholder = "Add your text here",
-    )
+
+def tldr(text_input):
+
     # TODO: enable custome parameter settings
     # TODO: enable multiple tl;dr outputs
 
@@ -41,10 +38,11 @@ def tldr():
     else:
         return None
 
+
 def dalle2(text_input):
     if text_input:
         img_response = openai.Image.create(prompt=text_input, n=1, size="1024x1024")
-        image_url = img_response.data[0].url    
+        image_url = img_response.data[0].url
         st.image(image_url)
     else:
         st.image(DEFAULT_IMG_URL, width=500)
@@ -52,5 +50,6 @@ def dalle2(text_input):
 
 if __name__ == "__main__":
     init()
-    text = tldr()
+    text_input = input_initial_data()
+    text = tldr(text_input)
     dalle2(text)
