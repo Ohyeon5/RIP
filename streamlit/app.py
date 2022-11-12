@@ -1,7 +1,7 @@
 import openai
 import streamlit as st
 
-from rip.utils import initialize_openai_api
+from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
 
 
 def init():
@@ -19,13 +19,13 @@ def init():
 
 def tldr():
     text_input = st.text_input(
-        "What impact are you curious about?",
+        "Which impact are you curious about?",
         placeholder = "Add your text here",
     )
     # TODO: enable custome parameter settings
     # TODO: enable multiple tl;dr outputs
 
-    if st.button("show impact") and text_input is not None:
+    if st.button("show impact") and text_input:
         text_response = openai.Completion.create(
             model="text-davinci-002",
             prompt=f"{text_input} \n\n tl;dr",
@@ -46,6 +46,8 @@ def dalle2(text_input):
         img_response = openai.Image.create(prompt=text_input, n=1, size="1024x1024")
         image_url = img_response.data[0].url    
         st.image(image_url)
+    else:
+        st.image(DEFAULT_IMG_URL, width=500)
 
 
 if __name__ == "__main__":
