@@ -6,13 +6,12 @@ Reveal Impacts of eco-friendly Policies
 
 ### Who we are?
 
-We're a team of three around the world whom are from three different timezones to tackle with the climate change issues, teamed up for OpenAI Hackathon
-for Climate Change.
+We're a team of three around the world whom are from three different timezones tackling climate change issues as a team participating in the OpenAI Hackathon for Climate Change.
 
 
 ### What we're focusing on?
 
-We hear from so many individuals and companies about eco-friendly solutions or products being promoted, but in the second layer those solutions might be causing more CO2 emissions. We thought we can try to find some insights around those via OpenAI API capabilities.
+We hear from so many individuals and companies about eco-friendly solutions or products being promoted, but in the second layer those solutions might be causing more CO2 emissions. Using language understanding and summarization we will attempt to understand both government and business solutions, and make outcomes of approaches to the climate crisis accessible to anyone.
 
 
 ### What stages are we planning to have to get results? And how are they aligned with OpenAI features?
@@ -79,7 +78,7 @@ command to run if program contains helper info
 Contributors names and contact info
 
 * Metin Aydar [@metinaydar](https://github.com/metinaydar)
-* Leif Martinson []()
+* Leif Martinson [@lfhvn](https://github.com/lfhvn)
 * Oh-hyeon Choung [@Ohyeon5](https://github.com/Ohyeon5)
 
 ## Version History
