@@ -1,5 +1,6 @@
 # RIP
 Reveal Impacts of eco-friendly Policies
+![Alt text](figs/default_img.png?raw=true)
 
 ## Description
 
