@@ -1,7 +1,7 @@
 import openai
-from api_secrets import API_KEY
+from rip.utils import initialize_openai_api
 
-openai.api_key = API_KEY
+initialize_openai_api()
 
 prompt = """A neutron star is the collapsed core of a massive supergiant star, 
 which had a total mass of between 10 and 25 solar masses, possibly more if the star was especially metal-rich.[1] 

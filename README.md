@@ -49,6 +49,7 @@ We hear from so many individuals and companies about eco-friendly solutions or p
     * add `api_secrets.py` and save your openAI API key as a variable
     ```
     API_KEY = "YOUR_API_KEY"
+    ORGANIZATION = "YOUR_ORGANIZATION"
     ```
     * test with any scripts in `./examples` to check if it works 
 

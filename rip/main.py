@@ -1,7 +1,9 @@
 import openai
-from api_secrets import API_KEY
 
-openai.api_key = API_KEY
+from rip.utils import initialize_openai_api
+
+initialize_openai_api()
+
 prompt = """A neutron star is the collapsed core of a massive supergiant star, 
 which had a total mass of between 10 and 25 solar masses, possibly more if the star was especially metal-rich.[1] 
 Neutron stars are the smallest and densest stellar objects, excluding black holes and hypothetical white holes, quark stars, 
@@ -11,21 +13,17 @@ They result from the supernova explosion of a massive star, combined with gravit
 Tl;dr"""
 
 text_response = openai.Completion.create(
-  model="text-davinci-002",
-  prompt=prompt,
-  temperature=0.7,
-  max_tokens=60,
-  top_p=1.0,
-  frequency_penalty=0.0,
-  presence_penalty=0.0
+    model="text-davinci-002",
+    prompt=prompt,
+    temperature=0.7,
+    max_tokens=60,
+    top_p=1.0,
+    frequency_penalty=0.0,
+    presence_penalty=0.0,
 )
 tldr_text = text_response.choices[0].text
 
-img_response = openai.Image.create(
-  prompt=tldr_text,
-  n=1,
-  size="1024x1024"
-)
+img_response = openai.Image.create(prompt=tldr_text, n=1, size="1024x1024")
 image_url = img_response.data[0].url
 
 print(image_url)
