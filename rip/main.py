@@ -1,8 +1,8 @@
 import openai
-from api_secrets import API_KEY, ORGANIZATION
 
-openai.api_key = API_KEY
-openai.organization = ORGANIZATION
+from rip.utils import initialize_openai_api
+
+initialize_openai_api()
 
 prompt = """A neutron star is the collapsed core of a massive supergiant star, 
 which had a total mass of between 10 and 25 solar masses, possibly more if the star was especially metal-rich.[1] 
@@ -23,7 +23,7 @@ text_response = openai.Completion.create(
 )
 tldr_text = text_response.choices[0].text
 
-img_response = openai.Image.create(prompt="glacier metling in a hanging valley", n=1, size="1024x1024")
+img_response = openai.Image.create(prompt=tldr_text, n=1, size="1024x1024")
 image_url = img_response.data[0].url
 
 print(image_url)
