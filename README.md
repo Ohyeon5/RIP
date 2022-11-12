@@ -45,6 +45,13 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 * How/where to download your program
 * Any modifications needed to be made to files/folders
 
+* add API_KEY to use openAI APIs
+    * add `api_secrets.py` and save your openAI API key as a variable
+    ```
+    API_KEY = "YOUR_API_KEY"
+    ```
+    * test with any scripts in `./examples` to check if it works 
+
 ### Executing program
 
 * How to run the program
