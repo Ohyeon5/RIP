@@ -106,7 +106,7 @@ def dalle2(
 
 if __name__ == "__main__":
     init()
-    api_key = st.text_input('Your API: ',"", type="password")
+    api_key = st.text_input('Your API_KEY: ',"", type="password")
     if api_key:
         openai.api_key = api_key
         with st.form(key="seq"):
