@@ -86,7 +86,16 @@ def get_semantic_search_results(question):
       frequency_penalty=0.1,
       presence_penalty=0
     )
-    results = response.choices[0].text.split(sep='.')
+    response_summary = openai.Completion.create(
+      model="text-davinci-002",
+      prompt="Summarize this with keywords:\n\n" + response.choices[0].text,
+      temperature=0,
+      max_tokens=50,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+    results = response_summary.choices[0].text.split(sep=', ')
     return results
 
      
