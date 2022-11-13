@@ -3,7 +3,7 @@ import streamlit as st
 import itertools
 from typing import Optional, Callable, Union
 
-from utils import initialize_openai_api, DEFAULT_IMG_URL
+from utils import DEFAULT_IMG_URL
 from components.input_data import input_data
 from components.image_generation import generate_image
 from components.explore_data import search_relevant_urls
