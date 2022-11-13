@@ -114,15 +114,10 @@ if __name__ == "__main__":
         action = suggest_actions(actions)
         dalle2(action, transform_text_to_scene_description)
         submit1 = st.form_submit_button("DALLE")
-    
-    # if submit1:
-    #     dalle2(action, transform_text_to_scene_description)
 
     with st.form(key="tldr_res"):    
         tldr_text = tldr()
-        submit2 = st.form_submit_button("DALLE")
-
-    if submit2:    
         dalle2(tldr_text, transform_text_to_scene_description)
+        submit2 = st.form_submit_button("DALLE")
 
 
