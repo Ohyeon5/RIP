@@ -77,17 +77,14 @@ def dalle2(text_input):
         
 def get_semantic_search_results(question):
     whoami = "I am a highly intelligent question answering bot against lowering CO2 emission. If you comment about your plan for popular eco-friendly solutions, I will answer with the side effects of those."
-    start_sequence = "\nA:"
-    restart_sequence = "\n\nQ: "
     response = openai.Completion.create(
       model="text-davinci-002",
-      prompt=whoami + "\n\nQ: "+ question +"\nA:",
+      prompt=whoami + "\n\nQuestion:" + question + "\n\nAnswer:",
       temperature=0,
-      max_tokens=100,
+      max_tokens=4000,
       top_p=1,
-      frequency_penalty=0,
-      presence_penalty=0,
-      stop=["\n"]
+      frequency_penalty=0.1,
+      presence_penalty=0
     )
     results = response.choices[0].text.split(sep='.')
     return results
