@@ -43,7 +43,7 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 * Add API_KEY to use openAI APIs
 
-    * Add `api_secrets.py` and save your openAI API key as a variable
+    * Add `api_secrets.py` in the root directory and save your openAI API key as a variable
     ```    
     import os
 
