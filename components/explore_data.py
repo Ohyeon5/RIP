@@ -63,7 +63,10 @@ def get_json_from_url(data_url = DATA_URL):
     for fn in all_fnames:
         url = data_url+fn
         response = requests.get(url).content
-        data.append(json.loads(response.decode("utf-8")))
+        try:
+            data.append(json.loads(response.decode("utf-8")))
+        except:
+            continue
     logging.info(f"There are {len(data)} json files in {data_url}")
     return data
     
