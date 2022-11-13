@@ -5,6 +5,7 @@ from typing import Optional, Callable, Union
 from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
 from ui.components.input_data import input_data
 from ui.components.image_generation import generate_image
+from ui.components.explore_data import search_relevant_urls
 from ui.components.text_completion import (
     get_default_completion_params,
     transform_text_to_scene_description,
@@ -18,7 +19,7 @@ DEFAULT_COMPLETION_PARAMS = get_default_completion_params()
 def init():
     # page settings
     st.set_page_config(
-        layout="centered",
+        layout="wide",
         page_title="Reveal Impacts of eco-friendly Policies (RIP)",
         page_icon="eco",
         menu_items={"Get help": "https://github.com/Ohyeon5/RIP"},
@@ -34,21 +35,30 @@ def get_search_question():
     return question
 
 
-def return_search_results(question):
-    results = get_semantic_search_results(question)
+def return_search_results(question:str):
+    results, keywords = get_semantic_search_results(question)
     # * Grouping, filtering and transforming the inputs which migh be useful for our search on second layer affects of policies and applications. (GPT3 Edit)
     st.subheader("We found those side affects regarding your choice")
     st.write(results)
-    actions = get_suggested_actions(question, results)
-    return actions
+    st.write(f"Keywords: {keywords}")
+    return results, keywords
 
-def suggest_actions(actions: str):
+def suggest_actions(question:str, keywords: str):
+    actions = get_suggested_actions(question, keywords)
     # * Generating quotes and new short definitions from what we found, as a list of takeaways. (GPT3 Explain and Write)
     st.subheader(
         "List of takeaways which might be considered"
     )
     st.write(actions)
     return actions
+
+def suggest_urls(keywords: str):
+    keywords = keywords.split(sep=',')
+    urls = search_relevant_urls(keywords)
+    st.subheader(
+        "Here are some interesting resources to have a look :)"
+    )
+    st.write(urls)
 
 
 def tldr():
@@ -99,8 +109,9 @@ if __name__ == "__main__":
     init()
     with st.form(key="seq"):
         question = get_search_question()
-        actions = return_search_results(question)
-        action = suggest_actions(actions)
+        _, keywords = return_search_results(question)
+        action = suggest_actions(question, keywords)
+        suggest_urls(keywords)
         dalle2(action, transform_text_to_scene_description)
         submit1 = st.form_submit_button("DALLE")
 
