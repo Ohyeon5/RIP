@@ -2,7 +2,8 @@ import streamlit as st
 from rip.utils import validate_url
 
 def input_initial_data():
-    st.write("Which impact are you curious about?")
+    st.subheader("Which impact are you more curious about?")
+
     type = st.radio(
         "In which format your input is in?",
         ("Text", "PDF file", "URL"),
