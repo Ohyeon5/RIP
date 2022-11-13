@@ -37,7 +37,8 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 from root path, run: 
 ```
-streamlit run ./ui/app.py
+(Linux or Mac users)> sh ./scripts/start-streamlit-app-linux
+(Windows users)> ./scripts/start-streamlit-app-windows.bat
 ```
 
 ### Dependencies
