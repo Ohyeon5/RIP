@@ -19,7 +19,7 @@ DEFAULT_COMPLETION_PARAMS = get_default_completion_params()
 def init():
     # page settings
     st.set_page_config(
-        layout="centered",
+        layout="wide",
         page_title="Reveal Impacts of eco-friendly Policies (RIP)",
         page_icon="eco",
         menu_items={"Get help": "https://github.com/Ohyeon5/RIP"},
