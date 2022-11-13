@@ -111,11 +111,11 @@ if __name__ == "__main__":
         openai.api_key = api_key
         with st.form(key="seq"):
             question = get_search_question()
+            submit1 = st.form_submit_button("Surprise Me!")
             _, keywords = return_search_results(question)
             action = suggest_actions(question, keywords)
             suggest_urls(keywords)
             dalle2(action, transform_text_to_scene_description)
-            submit1 = st.form_submit_button("DALLE")
 
         # with st.form(key="tldr_res"):    
         #     tldr_text = tldr()
