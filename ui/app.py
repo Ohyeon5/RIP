@@ -1,6 +1,6 @@
 import openai
 import streamlit as st
-from typing import List, Optional, Callable, Union
+from typing import Optional, Callable, Union
 
 from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
 from ui.components.input_data import input_data
@@ -25,7 +25,6 @@ def init():
     )
     # initialize openai api's variables
     initialize_openai_api()
-    # initialize_session_state_keys()
 
 
 def get_search_question():
@@ -43,19 +42,11 @@ def return_search_results(question):
     actions = get_suggested_actions(question, results)
     return actions
 
-
-
 def suggest_actions(actions: str):
     # * Generating quotes and new short definitions from what we found, as a list of takeaways. (GPT3 Explain and Write)
     st.subheader(
-        "List of takeaways which might be considered, according to current policies"
+        "List of takeaways which might be considered"
     )
-    # st.radio(
-    #     "Which action best fits?",
-    #     actions,
-    #     key="action",
-    #     # on_change=radio_to_dalle_handler("action"),
-    # )
     st.write(actions)
     return actions
 
@@ -86,7 +77,6 @@ def tldr():
             "Which tl;dr best fits ?",
             tldr_text_list,
             key="tldr",
-            # on_change=radio_to_dalle_handler("tldr"),
         )
         return tldr_text
     return None
@@ -95,7 +85,6 @@ def tldr():
 def dalle2(
     text_input: str,
     text_transformer: Optional[Callable] = None,
-    button_key: Optional[Union[str, int]] = None,
 ):
     st.subheader("Your DALL-E representation of the takeaways")
     if text_input:
