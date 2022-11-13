@@ -1,8 +1,9 @@
 import openai
 import streamlit as st
+from typing import List
 
 from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
-from ui.components.input_data import input_initial_data
+from ui.components.input_data import input_data
 from rip.utils import get_default_completion_params, set_completion_params
 
 
@@ -17,26 +18,29 @@ def init():
     # initialize openai api's variables
     initialize_openai_api()
 
-
-def tldr(text_input):
-
+def get_search_question():
     #* Finding resources we can use as an input for our solution. (GPT3 Compare for semantic search and recommendations)
     st.subheader("What solution you are thinking about against lowering CO2 emission?")
-    title = st.text_input('Your favorite solution:', "I'm planning to purchase an electric car")
+    question = st.text_input('Your favorite solution:', "I'm planning to purchase an electric car")
+    return question
 
+def return_search_results(results: List[str]):
     #* Grouping, filtering and transforming the inputs which migh be useful for our search on second layer affects of policies and applications. (GPT3 Edit)
     st.subheader("We found those side affects regarding your choice")
-    st.write("batteries, aluminium usage, electricity demand, ...")
+    st.write(", ".join(results))
 
+def suggest_actions(actions: List[str]):
     #* Generating quotes and new short definitions from what we found, as a list of takeaways. (GPT3 Explain and Write)
     st.subheader("List of takeaways which might be considered, according to current policies")
-    st.write("* you can look for the production processes which are using less ... for batteries")
-    st.write("* those materials could be picked insted of aluminium usage: ...")
-    st.write("* to decrease electricity demand, ...")
-
-    #* Supporting our findings with auto generated images from the copies we generated. (DALL-E)
-    st.subheader("Your DALL-E representation of the takeaways")
-    st.image(DEFAULT_IMG_URL)
+    action = st.radio(
+            "Which action best fits?",
+            actions)
+    dalle2(action)
+  
+    
+def tldr():     
+    st.subheader("Which impact are you more curious about?")
+    text_input = input_data()
 
     # TODO: enable custome parameter settings
     default_completion_params = get_default_completion_params()
@@ -58,22 +62,29 @@ def tldr(text_input):
             "Which tl;dr best fits ?",
             tldr_text_list)
         if tldr_text:  
-            return tldr_text
-    else:
-        return None
+            dalle2(tldr_text)
 
 
 def dalle2(text_input):
-    if text_input:
-        img_response = openai.Image.create(prompt=text_input, n=1, size="1024x1024")
-        image_url = img_response.data[0].url
-        st.image(image_url)
+    st.subheader("Your DALL-E representation of the takeaways")
+    if st.button("DALLE") and text_input:
+        img_response = openai.Image.create(prompt=text_input, n=3, size='256x256')
+        image_urls = [img_response.data[idx].url for idx in range(len(img_response))]
+        st.image(image_urls)
     else:
         st.image(DEFAULT_IMG_URL, width=500)
 
 
 if __name__ == "__main__":
     init()
-    text_input = input_initial_data()
-    text = tldr(text_input)
-    dalle2(text)
+    question = get_search_question()
+    # TODO: semantic search using question and get list of concerns
+    results = ["batteries", "aluminium usage", "electricity demand", "..."]
+    return_search_results(results)
+    # TODO: search results to suggested action
+    actions = ["you can look for the production processes which are using less ... for batteries",
+    "those materials could be picked insted of aluminium usage: ...",
+    "to decrease electricity demand, ...",]
+    suggest_actions(actions)
+    tldr()
+    
