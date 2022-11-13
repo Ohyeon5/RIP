@@ -6,19 +6,6 @@ from typing import Dict, Any
 
 DEFAULT_IMG_URL = "https://raw.githubusercontent.com/Ohyeon5/RIP/main/figs/default_img.png"
 
-""" for all possible parameters, see https://beta.openai.com/docs/api-reference/completions/create
-Note that `best_of` >= `n` is required 
-"""
-_default_completion_parameters = {
-    "temperature":0.7,
-    "max_tokens":60,
-    "top_p":1.0,
-    "frequency_penalty":0.0,
-    "presence_penalty":0.0,
-    "n": 1,
-    "best_of": 1,
-    }
-
 
 def initialize_openai_api():
     """initialize openai api's variables 
@@ -44,10 +31,3 @@ def validate_url(url: str) -> bool:
             r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
     return re.match(regex, url) is not None
-
-def get_default_completion_params() -> Dict[str, Any]:
-    return _default_completion_parameters
-
-def set_completion_params(param_dict: Dict[str, Any]) -> Dict[str, Any]:
-    params = get_default_completion_params()
-    return {k:  param_dict[k] if k in param_dict.keys() else v for k,v in params.items()}
