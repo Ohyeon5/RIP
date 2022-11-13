@@ -21,7 +21,7 @@ def init():
 def get_search_question():
     #* Finding resources we can use as an input for our solution. (GPT3 Compare for semantic search and recommendations)
     st.subheader("What solution you are thinking about against lowering CO2 emission?")
-    question = st.text_input('Ask a question about your favorite solution:', "Should I purchase an electric car?")
+    question = st.text_input('What is your favorite solution:', "I'll purchase an electric car")
     return question
 
 def return_search_results(results: List[str]):
@@ -86,7 +86,28 @@ def get_semantic_search_results(question):
       frequency_penalty=0.1,
       presence_penalty=0
     )
-    results = response.choices[0].text.split(sep='.')
+    response_summary = openai.Completion.create(
+      model="text-davinci-002",
+      prompt="Summarize this with keywords:\n\n" + response.choices[0].text,
+      temperature=0,
+      max_tokens=50,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+    whoami3 = "I'm a climate change campaigner to help to make actions that the public can follow easily. I also consider which scenario you are in. If you tell me the potential risks and the scenario, I will let you know which actions to take."
+    risks = response_summary.choices[0].text
+    scenario = question
+    response_actions = openai.Completion.create(
+      model="text-davinci-002",
+      prompt=whoami3+" \n\nPotential risks:\n"+risks+"\n\nScenario:\n"+scenario+"\n\nAction:\n",
+      temperature=0.7,
+      max_tokens=256,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
+    results = response_actions.choices[0].text.split(sep='\n')
     return results
 
      
