@@ -4,7 +4,7 @@ from api_secrets import API_KEY, ORGANIZATION
 from typing import Dict, Any
 
 
-DEFAULT_IMG_URL = "https://github.com/Ohyeon5/RIP/blob/ohyeon5/first_ui/figs/default_img.png"
+DEFAULT_IMG_URL = "https://raw.githubusercontent.com/Ohyeon5/RIP/main/figs/default_img.png"
 
 """ for all possible parameters, see https://beta.openai.com/docs/api-reference/completions/create
 Note that `best_of` >= `n` is required 
