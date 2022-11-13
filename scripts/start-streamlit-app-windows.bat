@@ -2,4 +2,4 @@ set file_path=%~dp0
 echo %~dp0
 set PYTHONPATH=%PYTHONPATH%;%file_path%;
 
-streamlit run .\ui\app.py
+streamlit run app.py

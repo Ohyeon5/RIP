@@ -8,7 +8,7 @@ from typing import List, Dict
 logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 
 DATA_PATH = "C:\\Users\\ohyeo\\OneDrive\\rip\\open-data-main\\data\\USA\\"
-DATA_URL = "https://raw.githubusercontent.com/climatepolicyradar/open-data/main/data/USA/"
+DATA_URL = "https://raw.githubusercontent.com/climatepolicyradar/open-data/main/data/USA/American_Recovery_and_Reinvestment_Act_11094.json"
 
 
 def argsort(seq):

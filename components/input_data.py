@@ -1,5 +1,5 @@
 import streamlit as st
-from rip.utils import validate_url
+from utils import validate_url
 
 
 def input_data():
