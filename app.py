@@ -87,12 +87,7 @@ def tldr():
         tldr_text_list = [
             text_response.choices[idx].text for idx in range(len(text_response.choices))
         ]
-        tldr_text = st.radio(
-            "Which tl;dr best fits ?",
-            tldr_text_list,
-            key="tldr",
-        )
-        return tldr_text
+        return tldr_text_list[0]
     return None
 
 
