@@ -21,7 +21,7 @@ def init():
 def get_search_question():
     #* Finding resources we can use as an input for our solution. (GPT3 Compare for semantic search and recommendations)
     st.subheader("What solution you are thinking about against lowering CO2 emission?")
-    question = st.text_input('Your favorite solution:', "I'm planning to purchase an electric car")
+    question = st.text_input('Ask a question about your favorite solution:', "Should I purchase an electric car?")
     return question
 
 def return_search_results(results: List[str]):
@@ -74,12 +74,31 @@ def dalle2(text_input):
     else:
         st.image(DEFAULT_IMG_URL, width=500)
 
+        
+def get_semantic_search_results(question):
+    whoami = "I am a highly intelligent question answering bot against lowering CO2 emission. If you comment about your plan for popular eco-friendly solutions, I will answer with the side effects of those."
+    start_sequence = "\nA:"
+    restart_sequence = "\n\nQ: "
+    response = openai.Completion.create(
+      model="text-davinci-002",
+      prompt=whoami + "\n\nQ: "+ question +"\nA:",
+      temperature=0,
+      max_tokens=100,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0,
+      stop=["\n"]
+    )
+    results = response.choices[0].text.split(sep='.')
+    return results
+
+     
 
 if __name__ == "__main__":
     init()
     question = get_search_question()
-    # TODO: semantic search using question and get list of concerns
-    results = ["batteries", "aluminium usage", "electricity demand", "..."]
+    #results = ["batteries", "aluminium usage", "electricity demand", "..."]
+    results = get_semantic_search_results(question)
     return_search_results(results)
     # TODO: search results to suggested action
     actions = ["you can look for the production processes which are using less ... for batteries",
