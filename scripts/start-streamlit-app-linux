@@ -1,4 +1,0 @@
-#!/bin/bash
-export PYTHONPATH=$(dirname $(readlink -f $(dirname "$0")))
-
-streamlit run ./ui/app.py
