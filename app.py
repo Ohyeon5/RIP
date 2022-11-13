@@ -3,11 +3,11 @@ import streamlit as st
 import itertools
 from typing import Optional, Callable, Union
 
-from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
-from ui.components.input_data import input_data
-from ui.components.image_generation import generate_image
-from ui.components.explore_data import search_relevant_urls
-from ui.components.text_completion import (
+from utils import initialize_openai_api, DEFAULT_IMG_URL
+from components.input_data import input_data
+from components.image_generation import generate_image
+from components.explore_data import search_relevant_urls
+from components.text_completion import (
     get_default_completion_params,
     transform_text_to_scene_description,
     get_semantic_search_results,
