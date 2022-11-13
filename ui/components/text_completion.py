@@ -1,6 +1,6 @@
 import openai
 import streamlit as st
-from typing import Dict, Any
+from typing import Dict, Any, Tuple
 
 
 """ for all possible parameters, see https://beta.openai.com/docs/api-reference/completions/create
@@ -41,7 +41,16 @@ def transform_text_to_scene_description(text_input: str, **kwags) -> str:
     )
     return response.choices[0].text
 
-def get_semantic_search_results(question: str):    
+def get_semantic_search_results(question: str)-> Tuple[str, str]:
+    """
+    get semantic search results from openAI api and return both search result and keywords
+
+    args:
+        question (str): question to ask
+    returns:
+        result (str): search result
+        keywords (str): summarized results
+    """    
     whoami = "I am a highly intelligent question answering bot against lowering CO2 emission. If you comment about your plan for popular eco-friendly solutions, I will answer with the side effects of those."
     response = openai.Completion.create(
       model="text-davinci-002",
@@ -61,7 +70,7 @@ def get_semantic_search_results(question: str):
       frequency_penalty=0,
       presence_penalty=0,
     )
-    return response_summary.choices[0].text
+    return response.choices[0].text, response_summary.choices[0].text
 
 def get_suggested_actions(question: str, summaries: str):
 
