@@ -1,5 +1,6 @@
 import openai
 import streamlit as st
+import itertools
 from typing import Optional, Callable, Union
 
 from rip.utils import initialize_openai_api, DEFAULT_IMG_URL
@@ -53,12 +54,13 @@ def suggest_actions(question:str, keywords: str):
     return actions
 
 def suggest_urls(keywords: str):
-    keywords = keywords.split(sep=',')
-    urls = search_relevant_urls(keywords)
+    keywords = list(itertools.chain(*[k.split(sep=' ') for k in keywords.split(sep=',')]))
+    title_url_dict = search_relevant_urls(keywords)
     st.subheader(
         "Here are some interesting resources to have a look :)"
     )
-    st.write(urls)
+    text = "\n\n ".join([f"[{title}]({url})" for title, url in title_url_dict.items()])
+    st.write(text)
 
 
 def tldr():
