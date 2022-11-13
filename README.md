@@ -1,5 +1,6 @@
 # RIP
 Reveal Impacts of eco-friendly Policies
+![Alt text](figs/default_img.png?raw=true)
 
 ## Description
 
@@ -33,6 +34,11 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 
 ## Getting Started
+
+from root path, run: 
+```
+streamlit run ./ui/app.py
+```
 
 ### Dependencies
 
