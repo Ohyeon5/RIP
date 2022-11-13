@@ -40,6 +40,8 @@ all_fnames = ["American_Recovery_and_Reinvestment_Act_11094.json",
 "Revised_2023_and_Later_Model_Year_Light-Duty_Vehicle_Greenhouse_Gas_Emissions_Standards_12605.json",
 "Stafford_Disaster_Relief_and_Emergency_Assistance_Act_12489.json",
 "The_Biden-?Harris_Plan_to_Revitalize_American_Manufacturing_and_Secure_Critical_Supply_Chains_in_202.json",]
+
+
 def argsort(seq):
     return sorted(range(len(seq)), key=seq.__getitem__)
 
@@ -60,13 +62,14 @@ def get_json_from_url(data_url = DATA_URL):
     data = []
     for fn in all_fnames:
         url = data_url+fn
-        data.append(requests.get(data_url).content)
-    print(data.keys())
-
-
+        response = requests.get(url).content
+        data.append(json.loads(response.decode("utf-8")))
+    logging.info(f"There are {len(data)} json files in {data_url}")
+    return data
+    
 
 def search_relevant_urls(keywords: List[str], n: int=3)-> Dict[str, str]:
-    data = get_json_from_path(DATA_PATH)
+    data = get_json_from_url(DATA_URL)
     dump_all_idx = []
     for k in keywords:
         dump_all_idx.extend([idx for idx, d in enumerate(data) if val_in_list(k.strip().lower(), list(map(str.lower, d["document_keyword"])))])
