@@ -35,44 +35,43 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 ## Getting Started
 
-from root path, run: 
-```
-(Linux or Mac users)> sh ./scripts/start-streamlit-app-linux
-(Windows users)> ./scripts/start-streamlit-app-windows.bat
-```
-
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* TODO: Describe any prerequisites, libraries, OS version, etc., needed before installing program.
 
 ### Installing
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+* Add API_KEY to use openAI APIs
 
-* add API_KEY to use openAI APIs
-    * add `api_secrets.py` and save your openAI API key as a variable
+    * Add `api_secrets.py` and save your openAI API key as a variable
+    ```    
+    import os
+
+    ORGANIZATION='org-...'
+    API_KEY='sk-...'
+
+    #override if there's a key defined as a system wide parameter
+    if os.getenv('OPENAI_ORG') != None:
+        ORGANIZATION=os.getenv('OPENAI_ORG')
+        
+    if os.getenv('OPENAI_API_KEY') != None:
+        API_KEY=os.getenv('OPENAI_API_KEY')
     ```
-    API_KEY = "YOUR_API_KEY"
-    ORGANIZATION = "YOUR_ORGANIZATION"
-    ```
-    * test with any scripts in `./examples` to check if it works 
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
+* Test with any scripts in `./examples` to check if it works (optional)
+* From root path, run: 
 ```
-code blocks for commands
+(Linux or Mac users)> sh ./scripts/start-streamlit-app-linux
+(Windows users)     > ./scripts/start-streamlit-app-windows.bat
 ```
+
 
 ## Help
 
-Any advise for common problems or issues.
-```
-command to run if program contains helper info
-```
+TODO: Any advise for common problems or issues.
+
 
 ## Authors
 
@@ -81,6 +80,7 @@ Contributors names and contact info
 * Metin Aydar [@metinaydar](https://github.com/metinaydar)
 * Leif Martinson [@lfhvn](https://github.com/lfhvn)
 * Oh-hyeon Choung [@Ohyeon5](https://github.com/Ohyeon5)
+
 
 ## Version History
 
@@ -92,13 +92,14 @@ Contributors names and contact info
 * 0.1
     * Initial Release
 
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
-## Acknowledgments
 
-Inspiration, code snippets, etc.
+## Acknowledgments
+TODO: Inspiration, code snippets, etc.
 * [awesome-readme](https://github.com/matiassingers/awesome-readme)
 * [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 * [dbader](https://github.com/dbader/readme-template)
