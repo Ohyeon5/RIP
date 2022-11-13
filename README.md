@@ -1,5 +1,5 @@
-# RIP
-Reveal Impacts of eco-friendly Policies
+# RIP (Reveal Impacts of eco-friendly Policies)
+Try this out! https://ohyeon5-rip-app-ad51gz.streamlit.app/
 ![Alt text](figs/default_img.png?raw=true)
 
 ## Description
