@@ -37,7 +37,7 @@ We hear from so many individuals and companies about eco-friendly solutions or p
 
 from root path, run: 
 ```
-streamlit run ./streamlit/app.py
+streamlit run ./ui/app.py
 ```
 
 ### Dependencies

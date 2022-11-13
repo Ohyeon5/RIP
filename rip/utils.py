@@ -1,8 +1,24 @@
 import openai
 import re
 from api_secrets import API_KEY, ORGANIZATION
+from typing import Dict, Any
 
-DEFAULT_IMG_URL = "https://oaidalleapiprodscus.blob.core.windows.net/private/org-WUj2RT1EDW0dxp5pdZ1cixJz/user-VyFZAHxqEZ2X6M0XJ98C2zbc/img-XmAd24nVMBaHPeBoPzDNIen7.png?st=2022-11-12T13%3A55%3A31Z&se=2022-11-12T15%3A55%3A31Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-11-11T23%3A13%3A21Z&ske=2022-11-12T23%3A13%3A21Z&sks=b&skv=2021-08-06&sig=95hXSEujfXMDZ204VRhQTTQdv6tuc9e2L1ICzuYGQd8%3D"
+
+DEFAULT_IMG_URL = "https://github.com/Ohyeon5/RIP/blob/ohyeon5/first_ui/figs/default_img.png"
+
+""" for all possible parameters, see https://beta.openai.com/docs/api-reference/completions/create
+Note that `best_of` >= `n` is required 
+"""
+_default_completion_parameters = {
+    "temperature":0.7,
+    "max_tokens":60,
+    "top_p":1.0,
+    "frequency_penalty":0.0,
+    "presence_penalty":0.0,
+    "n": 1,
+    "best_of": 1,
+    }
+
 
 def initialize_openai_api():
     """initialize openai api's variables 
@@ -28,3 +44,10 @@ def validate_url(url: str) -> bool:
             r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
     return re.match(regex, url) is not None
+
+def get_default_completion_params() -> Dict[str, Any]:
+    return _default_completion_parameters
+
+def set_completion_params(param_dict: Dict[str, Any]) -> Dict[str, Any]:
+    params = get_default_completion_params()
+    return {k:  param_dict[k] if k in param_dict.keys() else v for k,v in params.items()}
