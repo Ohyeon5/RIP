@@ -13,7 +13,6 @@ _default_completion_parameters = {
     "frequency_penalty":0.0,
     "presence_penalty":0.0,
     "n": 1,
-    "best_of": 3,
     "stop":"\n",
     }
 
@@ -42,18 +41,40 @@ def transform_text_to_scene_description(text_input: str, **kwags) -> str:
     )
     return response.choices[0].text
 
-def get_semantic_search_results(question: str):
+def get_semantic_search_results(question: str):    
     whoami = "I am a highly intelligent question answering bot against lowering CO2 emission. If you comment about your plan for popular eco-friendly solutions, I will answer with the side effects of those."
     response = openai.Completion.create(
       model="text-davinci-002",
-      prompt=whoami + "\n\nQ: "+ question +"\nA:",
+      prompt=whoami + "\n\nQuestion:" + question + "\n\nAnswer:",
       temperature=0,
-      max_tokens=100,
+      max_tokens=4000,
+      top_p=1,
+      frequency_penalty=0.1,
+      presence_penalty=0,
+    )
+    response_summary = openai.Completion.create(
+      model="text-davinci-002",
+      prompt="Summarize this with keywords:\n\n" + response.choices[0].text,
+      temperature=0,
+      max_tokens=50,
       top_p=1,
       frequency_penalty=0,
       presence_penalty=0,
-      best_of=3,
-      stop=["\n"]
     )
-    results = response.choices[0].text.split(sep='.')
-    return results
+    return response_summary.choices[0].text
+
+def get_suggested_actions(question: str, summaries: str):
+
+    whoami3 = "I'm a climate change campaigner to help to make actions that the public can follow easily. I also consider which scenario you are in. If you tell me the potential risks and the scenario, I will let you know which actions to take."
+    risks = summaries
+    scenario = question
+    response_actions = openai.Completion.create(
+      model="text-davinci-002",
+      prompt=whoami3+" \n\nPotential risks:\n"+risks+"\n\nScenario:\n"+scenario+"\n\nAction:\n",
+      temperature=0.7,
+      max_tokens=256,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0,
+    )
+    return response_actions.choices[0].text

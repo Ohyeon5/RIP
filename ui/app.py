@@ -9,6 +9,7 @@ from ui.components.text_completion import (
     get_default_completion_params,
     transform_text_to_scene_description,
     get_semantic_search_results,
+    get_suggested_actions
 )
 
 DEFAULT_COMPLETION_PARAMS = get_default_completion_params()
@@ -30,11 +31,7 @@ def init():
 def get_search_question():
     # * Finding resources we can use as an input for our solution. (GPT3 Compare for semantic search and recommendations)
     st.subheader("What solution you are thinking about against lowering CO2 emission?")
-    question = st.text_input(
-        "Ask a question about your favorite solution:",
-        "Should I purchase an electric car?",
-        key="question",
-    )
+    question = st.text_input('What is your favorite solution:', "I'll purchase an electric car")
     return question
 
 
@@ -42,21 +39,25 @@ def return_search_results(question):
     results = get_semantic_search_results(question)
     # * Grouping, filtering and transforming the inputs which migh be useful for our search on second layer affects of policies and applications. (GPT3 Edit)
     st.subheader("We found those side affects regarding your choice")
-    st.write(".\n\n".join(results))
+    st.write(results)
+    actions = get_suggested_actions(question, results)
+    return actions
 
 
 
-def suggest_actions(actions: List[str]):
+def suggest_actions(actions: str):
     # * Generating quotes and new short definitions from what we found, as a list of takeaways. (GPT3 Explain and Write)
     st.subheader(
         "List of takeaways which might be considered, according to current policies"
     )
-    return st.radio(
-        "Which action best fits?",
-        actions,
-        key="action",
-        # on_change=radio_to_dalle_handler("action"),
-    )
+    # st.radio(
+    #     "Which action best fits?",
+    #     actions,
+    #     key="action",
+    #     # on_change=radio_to_dalle_handler("action"),
+    # )
+    st.write(actions)
+    return actions
 
 
 def tldr():
@@ -91,14 +92,6 @@ def tldr():
     return None
 
 
-def radio_to_dalle_handler(key: str):
-    dalle2(
-        text_input=st.session_state[key],
-        text_transformer=transform_text_to_scene_description,
-        button_key=f"show_{key}",
-    )
-
-
 def dalle2(
     text_input: str,
     text_transformer: Optional[Callable] = None,
@@ -111,26 +104,19 @@ def dalle2(
         generate_image(text_input=text_input)
     else:
         st.image(DEFAULT_IMG_URL, width=500)
-
+     
 
 if __name__ == "__main__":
     init()
     with st.form(key="seq"):
         question = get_search_question()
-        return_search_results(question)
-        # TODO: search results to suggested action
-        
-        actions = [
-            "you can look for the production processes which are using less ... for batteries",
-            "those materials could be picked insted of aluminium usage: ...",
-            "to decrease electricity demand, ...",
-        ]
+        actions = return_search_results(question)
         action = suggest_actions(actions)
-
+        dalle2(action, transform_text_to_scene_description)
         submit1 = st.form_submit_button("DALLE")
     
-    if submit1:
-        dalle2(action, transform_text_to_scene_description)
+    # if submit1:
+    #     dalle2(action, transform_text_to_scene_description)
 
     with st.form(key="tldr_res"):    
         tldr_text = tldr()
