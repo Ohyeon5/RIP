@@ -1,17 +1,17 @@
 import openai
 import re
-from api_secrets import API_KEY, ORGANIZATION
+# from api_secrets import API_KEY, ORGANIZATION
 from typing import Dict, Any
 
 
 DEFAULT_IMG_URL = "https://raw.githubusercontent.com/Ohyeon5/RIP/main/figs/default_img.png"
 
 
-def initialize_openai_api():
-    """initialize openai api's variables 
-    """
-    openai.api_key = API_KEY
-    openai.organization = ORGANIZATION
+# def initialize_openai_api():
+#     """initialize openai api's variables 
+#     """
+#     openai.api_key = API_KEY
+#     openai.organization = ORGANIZATION
 
 def validate_url(url: str) -> bool:
     """validate if input str is a url, return bool
