@@ -1,6 +1,6 @@
 import openai
 
-from rip.utils import initialize_openai_api
+from ..utils import initialize_openai_api
 
 initialize_openai_api()
 

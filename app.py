@@ -26,7 +26,9 @@ def init():
         menu_items={"Get help": "https://github.com/Ohyeon5/RIP"},
     )
     # initialize openai api's variables
-    initialize_openai_api()
+    # initialize_openai_api()
+    
+
 
 
 def get_search_question():
@@ -109,15 +111,18 @@ def dalle2(
 
 if __name__ == "__main__":
     init()
-    with st.form(key="seq"):
-        question = get_search_question()
-        _, keywords = return_search_results(question)
-        action = suggest_actions(question, keywords)
-        suggest_urls(keywords)
-        dalle2(action, transform_text_to_scene_description)
-        submit1 = st.form_submit_button("DALLE")
+    api_key = st.text_input('your input',"")
+    if api_key:
+        openai.api_key = api_key
+        with st.form(key="seq"):
+            question = get_search_question()
+            _, keywords = return_search_results(question)
+            action = suggest_actions(question, keywords)
+            suggest_urls(keywords)
+            dalle2(action, transform_text_to_scene_description)
+            submit1 = st.form_submit_button("DALLE")
 
-    with st.form(key="tldr_res"):    
-        tldr_text = tldr()
-        dalle2(tldr_text, transform_text_to_scene_description)
-        submit2 = st.form_submit_button("DALLE")
+        with st.form(key="tldr_res"):    
+            tldr_text = tldr()
+            dalle2(tldr_text, transform_text_to_scene_description)
+            submit2 = st.form_submit_button("DALLE")
