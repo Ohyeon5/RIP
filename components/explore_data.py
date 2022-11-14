@@ -3,7 +3,7 @@ import json
 import logging
 import requests
 from urllib.request import urlopen
-from urllib.parse import urlparse, urljoin
+from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 from typing import List, Dict
 
