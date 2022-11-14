@@ -95,4 +95,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 ## Acknowledgments
 TODO: Inspiration, code snippets, etc.
+* [OpenAI Climate change Hackathon](https://openai.com/hackathon/)
 * [Climate Policy Radar Open Data](https://github.com/climatepolicyradar/open-data)
