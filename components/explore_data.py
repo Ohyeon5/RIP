@@ -61,10 +61,10 @@ def crawl_url(search_url, base_url):
     "fetch URL content from search_url and return all json included urls."
     ""
     result_urls = []
-    html_page = urlopen(url)
+    html_page = urlopen(search_url)
     soup = BeautifulSoup(html_page)
     for link in soup.findAll('a'):
-        fullurl = urljoin(url, link.get('href'))
+        fullurl = urljoin(search_url, link.get('href'))
         if ".json" in fullurl.lower():
             result_urls.append(urljoin(base_url, fullurl.rsplit('/', 1)[-1]))
     return result_urls
